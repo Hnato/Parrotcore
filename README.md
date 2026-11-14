@@ -15,7 +15,7 @@
 
 </div>
 
----
+
 
 ## 🦜 Welcome to ParrotCore!
 
@@ -27,7 +27,7 @@ Version **2.3 "Hyacinth"** is our fastest, cleanest, and most versatile release 
   <img src="./Image/app.png" alt="ParrotCore Desktop Host UI" width="85%" />
 </div>
 
----
+
 
 ## 🔥 Why Choose ParrotCore?
 
@@ -49,7 +49,7 @@ Don't waste hours configuring database drivers. ParrotCore adapts automatically 
 - **7 Built-in Languages:** Full localization in English, Polish, German, French, Chinese, Japanese, and Norwegian Bokmål.
 - **Instant Auto-Save & Backup Recovery:** Settings save automatically, and the built-in template backup can restore the default starter website and documentation at any time.
 
----
+
 
 ## 🖥️ Powerful Yet Lightweight
 
@@ -63,7 +63,7 @@ ParrotCore combines a high-speed HTTP engine with a sleek **3-Panel Windows Desk
 - 🔍 **Project Inspector Wizard:** Audits your website folder for entry files, responsive viewport metadata, PHP readiness, and database configuration.
 - 📦 **Upgrade-Safe Architecture:** Preserves your settings across updates via dual configuration persistence and Inno Setup installer integration.
 
----
+
 
 ## ⚙️ How to Get Started
 
@@ -74,7 +74,7 @@ Setting up your own web server with ParrotCore takes seconds:
 3. **Launch:** Open **ParrotCore.exe** and click **Start Engine**.
 4. **Go Live:** Click **Open Website** to view your site in your browser or share your LAN address with your network!
 
----
+
 
 ## 🛠 For the Geeks (Tech Stack)
 
@@ -83,12 +83,12 @@ Built with passion for maximum speed, portability, and low memory footprint:
 - **Database Drivers:** `Microsoft.Data.Sqlite`, ADO.NET & JSON Bridge Generator (`parrotcore-db.json` / `parrotcore-db.js`)
 - **Web Runtime:** HTML5, CSS3, Vanilla ES6+ JavaScript, PHP CGI / CLI Middleware
 
----
+
 
 ## 👑 The Mastermind
 
 Crafted with 💖 by:
-- 👨‍💻 ** (["Hnato"](https://github.com/Hnato))**
+- 👨‍💻 ["Hnato"](https://github.com/Hnato)
 
 <div align="center">
 &copy; 2026 ParrotCore Hnato <br>

@@ -15,10 +15,6 @@
 
 </div>
 
-
-
-## 🦜 Welcome to ParrotCore!
-
 Tired of heavy, complicated web server stacks just to host or test your websites? **ParrotCore** is your ultimate all-in-one website engine for Windows 10 and Windows 11. Simply drop your website files into the `Web Site` folder, hit **Start Engine**, and broadcast your site instantly on `localhost` or across your entire LAN network (`0.0.0.0`).
 
 Version **2.3 "Hyacinth"** is our fastest, cleanest, and most versatile release yet — featuring a real-time 3-panel desktop workspace, native PHP interpretation, zero-config SQLite & Key-Value APIs, external database connectors, and automatic starter template recovery.

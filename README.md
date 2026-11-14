@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./Image/baner.png" alt="ParrotCore Logo" width="100%" />
+<img src="./Image/baner.png" alt="ParrotCore baner" width="100%" />
 
 <br />
 

@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>Parrotcore.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationTitle>ParrotCore 2.3 Hyacinth</ApplicationTitle>
+    <AssemblyName>ParrotCore</AssemblyName>
+    <AssemblyTitle>ParrotCore Web Engine</AssemblyTitle>
+    <RootNamespace>ParrotCore</RootNamespace>
+    <Version>2.3.0.0</Version>
+    <AssemblyVersion>2.3.0.0</AssemblyVersion>
+    <FileVersion>2.3.0.0</FileVersion>
+    <InformationalVersion>2.3.0 Hyacinth</InformationalVersion>
+    <Authors>Hnato</Authors>
+    <Company>JGS-Team</Company>
+    <Product>ParrotCore</Product>
+    <Description>ParrotCore 2.3 Hyacinth Web Engine by Hnato (JGS-Team)</Description>
+    <Copyright>Copyright 2026 Hnato ©</Copyright>
+    <RepositoryUrl>https://github.com/Hnato/Parrotcore</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
+    <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+    <GenerateStaticWebAssetsEndpointsManifest>false</GenerateStaticWebAssetsEndpointsManifest>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <Deterministic>true</Deterministic>
+    <PathMap>$(MSBuildProjectDirectory)=ParrotCore</PathMap>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Parrotcore.ico" />
+    <Resource Include="Parrotcore.png" />
+    <EmbeddedResource Include="Parrotcore.ico" />
+    <EmbeddedResource Include="Parrotcore.png" />
+    <EmbeddedResource Include="Data\DefaultWebsite\index.html" LogicalName="DefaultWebsite/index.html" />
+    <EmbeddedResource Include="Data\DefaultWebsite\guide.html" LogicalName="DefaultWebsite/guide.html" />
+    <EmbeddedResource Include="Data\DefaultWebsite\404.html" LogicalName="DefaultWebsite/404.html" />
+    <EmbeddedResource Include="Data\DefaultWebsite\Parrotcore.ico" LogicalName="DefaultWebsite/Parrotcore.ico" />
+    <EmbeddedResource Include="Data\DefaultWebsite\favicon.ico" LogicalName="DefaultWebsite/favicon.ico" />
+    <EmbeddedResource Include="Data\DefaultWebsite\css\style.css" LogicalName="DefaultWebsite/css/style.css" />
+    <EmbeddedResource Include="Data\DefaultWebsite\js\app.js" LogicalName="DefaultWebsite/js/app.js" />
+    <EmbeddedResource Include="Data\DefaultWebsite\img\guide-01-dashboard.png" LogicalName="DefaultWebsite/img/guide-01-dashboard.png" />
+    <EmbeddedResource Include="Data\DefaultWebsite\img\guide-02-project-inspector.png" LogicalName="DefaultWebsite/img/guide-02-project-inspector.png" />
+    <EmbeddedResource Include="Data\DefaultWebsite\img\guide-03-modes.png" LogicalName="DefaultWebsite/img/guide-03-modes.png" />
+    <EmbeddedResource Include="Data\DefaultWebsite\img\guide-04-network.png" LogicalName="DefaultWebsite/img/guide-04-network.png" />
+    <EmbeddedResource Include="Data\DefaultWebsite\img\guide-05-database.png" LogicalName="DefaultWebsite/img/guide-05-database.png" />
+    <EmbeddedResource Include="Data\DefaultWebsite\img\guide-06-website-php.png" LogicalName="DefaultWebsite/img/guide-06-website-php.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

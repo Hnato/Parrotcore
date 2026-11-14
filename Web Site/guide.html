@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete User &amp; Developer Guide</title>
+    <link rel="icon" type="image/x-icon" href="Parrotcore.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="Parrotcore.ico">
+    <link rel="stylesheet" href="css/style.css?v=2.4">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0e1411;
+            background-image: radial-gradient(circle at 50% 0%, rgba(46, 204, 113, 0.09) 0%, transparent 55%);
+            color: #ebf4ee;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            padding: 28px 24px 64px 24px;
+            line-height: 1.65;
+        }
+
+        a:link {
+            color: #ffffff;
+            text-decoration: underline;
+            text-decoration-color: #2ecc71;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            transition: color 0.15s ease, opacity 0.15s ease;
+        }
+
+        a:visited {
+            color: #2ecc71;
+            text-decoration: underline;
+            text-decoration-color: #2ecc71;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        a:hover {
+            color: #2ecc71;
+            opacity: 0.92;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .topnav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #18221d;
+            border: 1px solid #2a3d33;
+            border-radius: 14px;
+            padding: 14px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 17px;
+            text-decoration: none !important;
+            color: #ffffff !important;
+        }
+
+        .brand img {
+            width: 30px !important;
+            height: 30px !important;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        .hero {
+            background: linear-gradient(145deg, #18221d 0%, #121a16 100%);
+            border: 1px solid #2a3d33;
+            border-radius: 18px;
+            padding: 38px 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.4);
+        }
+
+        .status-pill {
+            display: inline-block;
+            background: rgba(46, 204, 113, 0.14);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            line-height: 1.25;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        h4 {
+            font-size: 15px;
+            margin: 18px 0 10px 0;
+            color: #2ecc71;
+        }
+
+        .subtitle {
+            color: #a3b8ad;
+            font-size: 16px;
+            max-width: 860px;
+        }
+
+        .feature-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .feature-pill {
+            background: #101714;
+            border: 1px solid #263830;
+            color: #cfe3d8;
+            font-size: 12.5px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .guide-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 860px) {
+            .guide-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toc-card {
+            position: sticky;
+            top: 20px;
+            background: #18221d;
+            border: 1px solid #2a3d33;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .toc-title {
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #2ecc71;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toc-list li {
+            margin: 0;
+        }
+
+        .toc-list a {
+            display: inline-block;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+
+        .guide-section {
+            background: #18221d;
+            border: 1px solid #2a3d33;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 22px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        .guide-section p {
+            color: #b4c7bd;
+            font-size: 14.5px;
+            margin-bottom: 12px;
+        }
+
+        .guide-section ul,
+        .guide-section ol {
+            margin: 10px 0 16px 22px;
+            color: #b4c7bd;
+            font-size: 14.5px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .badge-step {
+            display: inline-block;
+            background: rgba(46, 204, 113, 0.16);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #101714;
+            border: 1px solid #263830;
+            padding: 2px 7px;
+            border-radius: 6px;
+            color: #2ecc71;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+        }
+
+        .mac-window {
+            background: #090d0b;
+            border: 1px solid #263830;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px 0 20px 0;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+        }
+
+        .mac-header {
+            background: #131b17;
+            border-bottom: 1px solid #22332b;
+            padding: 11px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mac-dots {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mac-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .mac-dot.red {
+            background: #ff5f56;
+        }
+
+        .mac-dot.yellow {
+            background: #ffbd2e;
+        }
+
+        .mac-dot.green {
+            background: #27c93f;
+        }
+
+        .mac-title {
+            color: #8fa89b;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mac-body {
+            padding: 20px 22px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'JetBrains Mono', monospace;
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: #e2f1e8;
+            white-space: pre;
+        }
+
+        .mac-body span {
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .tok-comment {
+            color: #679279;
+            font-style: italic;
+        }
+
+        .tok-kw {
+            color: #2ecc71;
+            font-weight: 600;
+        }
+
+        .tok-str {
+            color: #8ce99a;
+        }
+
+        .tok-fn {
+            color: #63b3ed;
+        }
+
+        .callout {
+            background: rgba(46, 204, 113, 0.08);
+            border-left: 3px solid #2ecc71;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            color: #d3e5db;
+            font-size: 13.5px;
+        }
+
+        .callout-warn {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid #f59e0b;
+        }
+
+        .screenshot-box {
+            margin: 18px 0 4px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a3d33;
+            background: #0b100e;
+        }
+
+        .screenshot-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-placeholder {
+            padding: 24px 20px;
+            text-align: center;
+            background: repeating-linear-gradient(45deg, #0d1310, #0d1310 12px, #121a16 12px, #121a16 24px);
+            color: #8fa89b;
+            font-size: 13.5px;
+        }
+
+        .screenshot-placeholder strong {
+            display: block;
+            color: #2ecc71;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 14px 0 18px 0;
+            border: 1px solid #263830;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid #263830;
+        }
+
+        th {
+            color: #ffffff;
+            background: #111814;
+            font-weight: 600;
+        }
+
+        td {
+            color: #b4c7bd;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <nav class="topnav">
+            <a href="index.html" class="brand">
+                <img src="Parrotcore.ico" width="30" height="30" alt="Logo">
+                <span>Web Server Workspace</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="guide.html" class="nav-link">Full Guide &amp; Documentation</a>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <span class="status-pill">● Complete Documentation &amp; Handbook</span>
+            <h1>Website Engine - Comprehensive User &amp; Developer Guide</h1>
+            <p class="subtitle">Everything you need to know about hosting static and dynamic websites, running PHP
+                applications, connecting to local or cloud databases, broadcasting over LAN, and optimizing performance
+                on Windows 10 &amp; Windows 11.</p>
+            <div class="feature-pills">
+                <span class="feature-pill">⚡ 3-Panel Live Workspace</span>
+                <span class="feature-pill">🐘 PHP CGI / CLI Bridge</span>
+                <span class="feature-pill">🗄️ SQLite • MariaDB • Azure • Postgres • Mongo</span>
+                <span class="feature-pill">🛡️ Simple &amp; Advanced Modes</span>
+            </div>
+        </header>
+
+        <div class="guide-layout">
+            <aside class="toc-card">
+                <div class="toc-title">Table of Contents</div>
+                <ul class="toc-list">
+                    <li><a href="#ch1">1. Dashboard &amp; 3-Panel Layout</a></li>
+                    <li><a href="#ch2">2. Hosting Your Website</a></li>
+                    <li><a href="#ch3">3. Simple vs. Advanced Mode</a></li>
+                    <li><a href="#ch4">4. Network &amp; LAN Broadcasting</a></li>
+                    <li><a href="#ch5">5. Built-In SQLite &amp; REST API</a></li>
+                    <li><a href="#ch6">6. MariaDB, XAMPP &amp; Cloud DBs</a></li>
+                    <li><a href="#ch7">7. PHP Interpreter (.php)</a></li>
+                    <li><a href="#ch8">8. Auto-Save &amp; Upgrades</a></li>
+                </ul>
+            </aside>
+
+            <div class="guide-content">
+                <section class="guide-section" id="ch1">
+                    <span class="badge-step">Chapter 1</span>
+                    <h2>Dashboard Overview &amp; 3-Panel Layout</h2>
+                    <p>The main workspace is engineered for clarity, low resource consumption, and instant feedback. It
+                        is divided into three specialized panels:</p>
+                    <ul>
+                        <li><strong>Panel 1 Engine Controls (Top-Left, Compact):</strong> Houses up to five
+                            color-coded action buttons that adapt dynamically to the engine's state:
+                            <ul>
+                                <li><code>Start Engine</code> (Green) / <code>Stop Engine</code> (Red): Starts or stops
+                                    the HTTP web server immediately.</li>
+                                <li><code>Restart</code> (Orange): Appears while the server is running to perform a
+                                    clean hot-restart.</li>
+                                <li><code>Configure Database</code> (Purple) / <code>Restart DB</code> (Amber): Opens
+                                    Database Settings if unconfigured, or restarts the active database connection pool.
+                                </li>
+                                <li><code>Open Website</code> (Blue): Launches your default system browser pointing to
+                                    either <code>http://localhost:PORT</code> or your active LAN IP address.</li>
+                                <li><code>Project Inspector</code> (Teal): Audits your website folder for missing entry
+                                    files, viewport tags, PHP readiness, and optional database integration.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Panel 2 Live Resources Monitor (Bottom-Left):</strong> Displays real-time,
+                            instantaneous metrics sampled every second without disk overhead:
+                            <ul>
+                                <li><strong>CPU Usage (%):</strong> Current processor load of the engine right now.</li>
+                                <li><strong>Memory (RAM):</strong> Current working set memory in megabytes (MB).</li>
+                                <li><strong>Network (Live):</strong> Instantaneous transfer rate (<code>B/s</code>,
+                                    <code>KB/s</code>, <code>MB/s</code>) and requests per second (<code>req/s</code>).
+                                    Drops back to <code>0 B/s • 0 req/s</code> immediately when idle.
+                                </li>
+                                <li><strong>Active Cache:</strong> Current in-memory cache allocation held in RAM.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Panel 3 Live Console (Right Side, Full Height):</strong> Displays the startup
+                            banner and real-time logs for HTTP requests, database connections, PHP warnings, and live
+                            file modifications.</li>
+                    </ul>
+
+                    <div class="screenshot-box">
+                        <img src="img/guide-01-dashboard.png" alt="Main 3-Panel Dashboard"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <div class="screenshot-placeholder" style="display:none;">
+                            <strong>Screenshot Slot: img/guide-01-dashboard.png</strong>
+                            Place a screenshot of the main 3-panel window (Controls + Live Resources + Console) in
+                            <code>Web Site/img/guide-01-dashboard.png</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch2">
+                    <span class="badge-step">Chapter 2</span>
+                    <h2>Hosting Your Website &amp; Custom Folders</h2>
+                    <p>By default, the engine serves files from the <code>Web Site</code> folder located next to the
+                        executable. However, you can select any directory on your computer:</p>
+                    <ol>
+                        <li><strong>Option A: Default Folder:</strong> Copy your <code>index.html</code>,
+                            <code>index.php</code>, CSS stylesheets, JavaScript bundles, and images into the
+                            <code>Web Site</code> directory.
+                        </li>
+                        <li><strong>Option B: Any Folder on Disk:</strong> Open <strong>Settings &rarr;
+                                Website</strong>, click <strong>Browse...</strong> next to <em>Website Root Folder</em>,
+                            and choose any project folder on your PC.</li>
+                        <li><strong>Verify with Project Inspector:</strong> Click <strong>Project Inspector</strong> on
+                            the dashboard to view an in-app modal audit of your entry document and assets.</li>
+                    </ol>
+
+                    <div class="callout">
+                        <strong>Automatic Favicon Support:</strong> Every generated starter page includes
+                        <code>Parrotcore.ico</code> as its favicon out of the box.
+                    </div>
+
+                    <div class="screenshot-box">
+                        <img src="img/guide-02-project-inspector.png" alt="Project Inspector Modal"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <div class="screenshot-placeholder" style="display:none;">
+                            <strong>Screenshot Slot: img/guide-02-project-inspector.png</strong>
+                            Place a screenshot of the in-app Project Inspector modal dialog in
+                            <code>Web Site/img/guide-02-project-inspector.png</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch3">
+                    <span class="badge-step">Chapter 3</span>
+                    <h2>Simple Mode vs. Advanced Mode</h2>
+                    <p>In the top-right corner of the <strong>Settings</strong> screen, switch seamlessly between
+                        <strong>Simple Mode</strong> and <strong>Advanced Mode</strong>:
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature Area</th>
+                                    <th>Simple Mode (Beginner-Friendly)</th>
+                                    <th>Advanced Mode (Full Control)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>General</strong></td>
+                                    <td>Windows startup, Minimize to tray, Update check, Language (7 languages),
+                                        Dark/Light theme</td>
+                                    <td>Same as Simple Mode</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Network</strong></td>
+                                    <td>Primary HTTP Port, Broadcast Mode (<code>Localhost</code> /
+                                        <code>0.0.0.0</code>), Auto-fallback port, Request logging, Port &amp; Firewall
+                                        Scanner
+                                    </td>
+                                    <td>Adds CORS toggle, Allowed CORS Origins, WebSockets &amp; Live Reload, Max
+                                        Request Body Size (MB)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Database</strong></td>
+                                    <td>Enable DB toggle, Mode selector (SQLite / Local MariaDB / External), dynamic
+                                        connection fields, Test &amp; Initialize buttons</td>
+                                    <td>Adds Custom Connection String override, Auto-generate adapted DB config file
+                                        toggle, REST API bridge (<code>/api/db</code>) toggle</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Website</strong></td>
+                                    <td>Website folder picker (Browse...), PHP Interpreter toggle (<code>.php</code>),
+                                        Live file watcher, Project Inspector &amp; Open Folder buttons</td>
+                                    <td>Adds Custom PHP binary path picker, Default index files, Custom 404 page,
+                                        Directory browsing, Gzip/Brotli, SPA Fallback routing, Cache Max-Age, Custom
+                                        HTTP headers</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="screenshot-box">
+                        <img src="img/guide-03-modes.png" alt="Simple vs Advanced Mode Switcher"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <div class="screenshot-placeholder" style="display:none;">
+                            <strong>Screenshot Slot: img/guide-03-modes.png</strong>
+                            Place a screenshot of the Settings view showing the Simple / Advanced mode switcher in
+                            <code>Web Site/img/guide-03-modes.png</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch4">
+                    <span class="badge-step">Chapter 4</span>
+                    <h2>Network Broadcasting (Localhost vs. 0.0.0.0) &amp; Diagnostics</h2>
+                    <p>Under <strong>Settings &rarr; Network</strong>, control how your website is broadcast across your
+                        machine and local network:</p>
+                    <ul>
+                        <li><strong>Both Localhost &amp; 0.0.0.0 (Recommended):</strong> Accessible via
+                            <code>http://localhost:5009</code> on your PC and via your LAN IP address (e.g.,
+                            <code>http://192.168.1.25:5009</code>) for phones, tablets, and other PCs on your Wi-Fi/LAN.
+                        </li>
+                        <li><strong>Localhost only (127.0.0.1):</strong> Restricts access strictly to your local
+                            machine.</li>
+                        <li><strong>Network Broadcast (0.0.0.0):</strong> Binds to all network interfaces and opens your
+                            LAN IP directly when clicking <em>Open Website</em>.</li>
+                    </ul>
+
+                    <div class="screenshot-box">
+                        <img src="img/guide-04-network.png" alt="Network Settings and Diagnostics"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <div class="screenshot-placeholder" style="display:none;">
+                            <strong>Screenshot Slot: img/guide-04-network.png</strong>
+                            Place a screenshot of the Network Settings tab or Network Diagnostics modal in
+                            <code>Web Site/img/guide-04-network.png</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch5">
+                    <span class="badge-step">Chapter 5</span>
+                    <h2>Built-In Serverless SQLite Database &amp; REST API Bridge</h2>
+                    <p>When <strong>Built-in Local SQLite Engine</strong> is active in <strong>Settings &rarr;
+                            Database</strong>, the engine manages a zero-configuration SQLite database at
+                        <code>Engine/Data/parrotcore.db</code>. When <em>Expose '/api/db' bridge endpoint</em> is
+                        enabled, your frontend JavaScript can store and query data directly:
+                    </p>
+
+                    <div class="mac-window">
+                        <div class="mac-header">
+                            <div class="mac-dots">
+                                <span class="mac-dot red"></span>
+                                <span class="mac-dot yellow"></span>
+                                <span class="mac-dot green"></span>
+                            </div>
+                            <span class="mac-title">:sqlite-rest-bridge.js &lt;=&gt; JavaScript (ES6+)</span>
+                        </div>
+                        <div class="mac-body"><span class="tok-comment">// 1. Save a JSON object into the built-in Key-Value store</span>
+<span class="tok-kw">await</span> <span class="tok-fn">fetch</span>(<span class="tok-str">'/api/db/kv/users/profile_1'</span>, {
+    method: <span class="tok-str">'POST'</span>,
+    headers: { <span class="tok-str">'Content-Type'</span>: <span class="tok-str">'application/json'</span> },
+    body: JSON.<span class="tok-fn">stringify</span>({ name: <span class="tok-str">'Alex'</span>, role: <span class="tok-str">'Admin'</span>, active: <span class="tok-kw">true</span> })
+});
+
+<span class="tok-comment">// 2. Read the item back</span>
+<span class="tok-kw">const</span> res = <span class="tok-kw">await</span> <span class="tok-fn">fetch</span>(<span class="tok-str">'/api/db/kv/users/profile_1'</span>);
+<span class="tok-kw">const</span> item = <span class="tok-kw">await</span> res.<span class="tok-fn">json</span>();
+console.<span class="tok-fn">log</span>(JSON.<span class="tok-fn">parse</span>(item.json_data));
+
+<span class="tok-comment">// 3. Execute a custom SQL query on SQLite</span>
+<span class="tok-kw">const</span> sqlRes = <span class="tok-kw">await</span> <span class="tok-fn">fetch</span>(<span class="tok-str">'/api/db/query'</span>, {
+    method: <span class="tok-str">'POST'</span>,
+    headers: { <span class="tok-str">'Content-Type'</span>: <span class="tok-str">'application/json'</span> },
+    body: JSON.<span class="tok-fn">stringify</span>({
+        sql: <span class="tok-str">'SELECT collection, item_key, updated_at FROM key_value_store LIMIT 10'</span>
+    })
+});
+<span class="tok-kw">const</span> data = <span class="tok-kw">await</span> sqlRes.<span class="tok-fn">json</span>();
+console.<span class="tok-fn">log</span>(data.rows);</div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch6">
+                    <span class="badge-step">Chapter 6</span>
+                    <h2>Local MariaDB / XAMPP &amp; External Cloud Databases</h2>
+                    <p>The Database tab dynamically adapts its input fields based on your selected deployment mode and
+                        engine:</p>
+                    <ul>
+                        <li><strong>Built-in Local SQLite Engine:</strong> Shows only the SQLite file path and a
+                            <em>Browse...</em> button.
+                        </li>
+                        <li><strong>Local MariaDB / XAMPP Instance:</strong> Reveals the <code>mysqld.exe</code> path
+                            picker, Host/Port/Database/User/Password fields, and the <strong>Launch Local MariaDB /
+                                XAMPP</strong> button.</li>
+                        <li><strong>External Database Server / Cloud Cluster:</strong> Supports
+                            <strong>MariaDB</strong>, <strong>MySQL</strong>, <strong>PostgreSQL</strong> (port
+                            <code>5432</code>), <strong>Microsoft SQL Server</strong> (port <code>1433</code>),
+                            <strong>Microsoft Azure SQL</strong> (<code>1433</code>), and <strong>MongoDB</strong> (port
+                            <code>27017</code>).
+                        </li>
+                    </ul>
+
+                    <div class="screenshot-box">
+                        <img src="img/guide-05-database.png" alt="Dynamic Database Settings"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <div class="screenshot-placeholder" style="display:none;">
+                            <strong>Screenshot Slot: img/guide-05-database.png</strong>
+                            Place a screenshot of the Database Settings tab in
+                            <code>Web Site/img/guide-05-database.png</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch7">
+                    <span class="badge-step">Chapter 7</span>
+                    <h2>PHP Scripting &amp; Backend Integration (.php)</h2>
+                    <p>With <strong>Enable PHP Script Interpreter (.php support)</strong> enabled in <strong>Settings
+                            &rarr; Website</strong>, the engine executes <code>.php</code> files automatically and
+                        injects your active database credentials as environment variables:</p>
+
+                    <div class="mac-window">
+                        <div class="mac-header">
+                            <div class="mac-dots">
+                                <span class="mac-dot red"></span>
+                                <span class="mac-dot yellow"></span>
+                                <span class="mac-dot green"></span>
+                            </div>
+                            <span class="mac-title">index.php &lt;=&gt; PHP 8+ PDO Database Connection</span>
+                        </div>
+                        <div class="mac-body"><span class="tok-kw">&lt;?php</span>
+<span class="tok-comment">// Pre-injected environment variables from active Database Settings</span>
+$provider = <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_PROVIDER'</span>);
+
+<span class="tok-kw">if</span> ($provider === <span class="tok-str">'SQLite'</span>) {
+    $pdo = <span class="tok-kw">new</span> <span class="tok-fn">PDO</span>(<span class="tok-str">'sqlite:'</span> . <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_SQLITE_PATH'</span>));
+} <span class="tok-kw">else</span> {
+    $dsn = <span class="tok-fn">sprintf</span>(
+        <span class="tok-str">'mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4'</span>,
+        <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_HOST'</span>),
+        <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_PORT'</span>),
+        <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_NAME'</span>)
+    );
+    $pdo = <span class="tok-kw">new</span> <span class="tok-fn">PDO</span>($dsn, <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_USER'</span>), <span class="tok-fn">getenv</span>(<span class="tok-str">'DB_PASS'</span>));
+}
+
+<span class="tok-kw">echo</span> <span class="tok-str">'Connected to database via '</span> . <span class="tok-fn">htmlspecialchars</span>($provider);
+<span class="tok-kw">?&gt;</span></div>
+                    </div>
+
+                    <div class="screenshot-box">
+                        <img src="img/guide-06-website-php.png" alt="Website & PHP Settings"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <div class="screenshot-placeholder" style="display:none;">
+                            <strong>Screenshot Slot: img/guide-06-website-php.png</strong>
+                            Place a screenshot of the Website Settings tab showing the Folder Picker and PHP Interpreter
+                            options in <code>Web Site/img/guide-06-website-php.png</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section" id="ch8">
+                    <span class="badge-step">Chapter 8</span>
+                    <h2>Auto-Save Rules, Portability &amp; Version Upgrades</h2>
+                    <div class="callout callout-warn">
+                        <strong>Why Settings Auto-Save When the Server is Stopped:</strong> To guarantee stability and
+                        prevent mid-request port or database conflicts, settings are saved immediately whenever the
+                        server is stopped.
+                    </div>
+                    <ul>
+                        <li><strong>Full Windows 10 &amp; Windows 11 Portability:</strong> All paths inside the
+                            application folder are stored as portable relative paths (<code>Web Site</code>,
+                            <code>Engine/Data/parrotcore.db</code>), so the entire application works seamlessly on any
+                            PC.
+                        </li>
+                        <li><strong>Safe Upgrades &amp; Inno Setup Preservation:</strong> When installing a newer
+                            release from <a href="https://github.com/Hnato/Parrotcore/releases" target="_blank">GitHub
+                                Releases</a>, your settings in <code>Engine/Data/parrotcore.config.json</code> are
+                            preserved automatically.</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

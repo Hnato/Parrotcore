@@ -1,0 +1,846 @@
+<Window x:Class="ParrotCore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="ParrotCore" Height="660" Width="960"
+        MinHeight="580" MinWidth="840"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        Background="{DynamicResource WindowBackground}"
+        AllowsTransparency="False"
+        WindowStyle="None"
+        Icon="pack://application:,,,/Parrotcore.ico"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
+        TextOptions.TextHintingMode="Fixed"
+        RenderOptions.ClearTypeHint="Enabled"
+        SnapsToDevicePixels="True"
+        RenderOptions.BitmapScalingMode="Fant">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="46" GlassFrameThickness="0" CornerRadius="12" NonClientFrameEdges="None"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="WindowBackground" Color="#121915"/>
+        <SolidColorBrush x:Key="HeaderBackground" Color="#0E1411"/>
+        <SolidColorBrush x:Key="CardBackground" Color="#18221D"/>
+        <SolidColorBrush x:Key="ConsoleBackground" Color="#0A0F0D"/>
+        <SolidColorBrush x:Key="ConsoleBorderBrush" Color="#23342B"/>
+        <SolidColorBrush x:Key="ConsoleForeground" Color="#DCECE3"/>
+        <SolidColorBrush x:Key="InputBackground" Color="#101714"/>
+        <SolidColorBrush x:Key="InputBorderBrush" Color="#2E4539"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#EBF4EE"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#8FA89B"/>
+        <SolidColorBrush x:Key="TextTertiary" Color="#5E786B"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#263830"/>
+        <SolidColorBrush x:Key="DividerBrush" Color="#1E2D26"/>
+        <SolidColorBrush x:Key="ColorPrimaryBrush" Color="#2ECC71"/>
+        <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#25A85C"/>
+
+        <DropShadowEffect x:Key="CardShadow" BlurRadius="14" Direction="270" RenderingBias="Quality" ShadowDepth="2" Opacity="0.22" Color="#000000"/>
+
+        <Style x:Key="ModernCard" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="Effect" Value="{StaticResource CardShadow}"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="9,7"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="True">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource BorderBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource DividerBrush}"/>
+                                <Setter Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ColoredActionButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Padding" Value="14,9"/>
+            <Setter Property="Margin" Value="0,0,0,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.40"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryBrowseButton" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource InputBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TabItemStyle" TargetType="TabItem">
+            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondary}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="border" Background="Transparent" BorderThickness="0,0,0,2.5" BorderBrush="Transparent" Margin="0,0,12,0">
+                            <ContentPresenter x:Name="content" ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ColorPrimaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="FontSize" Value="13.5"/>
+            <Setter Property="Margin" Value="0,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <BulletDecorator Background="Transparent" VerticalAlignment="Center">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="CheckBorder" Width="20" Height="20" Background="{DynamicResource InputBackground}" BorderBrush="{DynamicResource InputBorderBrush}" BorderThickness="2" CornerRadius="5" SnapsToDevicePixels="True">
+                                    <Path x:Name="CheckMark" Width="11" Height="11" Stretch="Uniform" Data="M 0 5 L 4 9 L 10 1" Stroke="White" StrokeThickness="2.5" StrokeLineJoin="Round" Visibility="Collapsed"/>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="10,1,0,0" VerticalAlignment="Center"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckBorder" Property="Background" Value="{DynamicResource ColorPrimaryBrush}"/>
+                                <Setter TargetName="CheckBorder" Property="BorderBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="CheckBorder" Property="BorderBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource InputBackground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource TextSecondary}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+                                <Setter TargetName="Root" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource InputBackground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton" Focusable="False" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="Root" Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ComboBox}}" BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=ComboBox}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=ComboBox}}" CornerRadius="8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="32"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Grid.Column="0" Background="Transparent"/>
+                                                <Path Grid.Column="1" Data="M 0 0 L 5 5 L 10 0 Z" Fill="{DynamicResource TextSecondary}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ColorPrimaryBrush}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="12,8,34,8" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                                <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="{DynamicResource CardBackground}" BorderBrush="{DynamicResource InputBorderBrush}" BorderThickness="1.5" CornerRadius="8" Margin="0,4,0,0" Effect="{StaticResource CardShadow}">
+                                        <ScrollViewer Margin="4" SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="Root" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="6" Margin="0,1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource DividerBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ColorPrimaryBrush}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Border x:Name="WindowFrame" Background="{DynamicResource WindowBackground}" CornerRadius="12" SnapsToDevicePixels="True"/>
+        <Grid x:Name="RootGrid" Background="{DynamicResource WindowBackground}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="TitleBarBorder" Grid.Row="0" Panel.ZIndex="10" Height="46" Background="{DynamicResource HeaderBackground}" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush}" CornerRadius="12,12,0,0" ClipToBounds="True" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+                        <Image Source="pack://application:,,,/Parrotcore.png" Width="24" Height="24" RenderOptions.BitmapScalingMode="Fant"/>
+                        <TextBlock x:Name="LblTopTitle" Text="ParrotCore" Foreground="{DynamicResource TextPrimary}" Margin="12,0,6,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center">
+                        <Button x:Name="ThemeBtn" Style="{StaticResource IconButton}" Click="Theme_Click" Margin="0,0,4,0" ToolTip="Switch Theme" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                            <TextBlock x:Name="ThemeIconText" Text="" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="{DynamicResource TextPrimary}"/>
+                        </Button>
+                        <Button x:Name="SettingsBtn" Style="{StaticResource IconButton}" Click="Settings_Click" Margin="0,0,4,0" ToolTip="Settings" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="{DynamicResource TextPrimary}"/>
+                        </Button>
+                        <Button x:Name="MinimizeBtn" Style="{StaticResource IconButton}" Click="Minimize_Click" Margin="0,0,4,0" ToolTip="Minimize" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="{DynamicResource TextPrimary}"/>
+                        </Button>
+                        <Button x:Name="CloseButton" Style="{StaticResource IconButton}" Click="Close_Click" ToolTip="Close" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="{DynamicResource TextPrimary}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1">
+                <Grid x:Name="MainDashboard" Margin="14,12,14,12" Visibility="Visible" SnapsToDevicePixels="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="290"/>
+                        <ColumnDefinition Width="14"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Style="{StaticResource ModernCard}" Padding="14,12">
+                            <StackPanel>
+                                <TextBlock x:Name="LblPanelControls" Text="STEROWANIE SILNIKIEM" Foreground="{DynamicResource TextSecondary}" FontSize="11" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <Button x:Name="BtnStartStop" Content="Uruchom Silnik" Style="{StaticResource ColoredActionButton}" Background="#2ECC71" Click="BtnStartStop_Click"/>
+                                <Button x:Name="BtnRestart" Content="Restartuj" Style="{StaticResource ColoredActionButton}" Background="#E67E22" Click="BtnRestart_Click"/>
+                                <Button x:Name="BtnDatabase" Content="Skonfiguruj Bazę Danych" Style="{StaticResource ColoredActionButton}" Background="#9B59B6" Click="BtnDatabase_Click"/>
+                                <Button x:Name="BtnOpenApp" Content="Otwórz Aplikację" Style="{StaticResource ColoredActionButton}" Background="#3498DB" Click="BtnOpenApp_Click"/>
+                                <Button x:Name="BtnWizard" Content="Kreator Projektu" Style="{StaticResource ColoredActionButton}" Background="#16A085" Margin="0" Click="BtnWizard_Click"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="2" Style="{StaticResource ModernCard}" Padding="15,14">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="LblPanelResources" Text="ZASOBY SILNIKA I STRONY" Foreground="{DynamicResource TextSecondary}" FontSize="11" FontWeight="Bold" Margin="0,0,0,14"/>
+
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock x:Name="LblResCpu" Text="Procesor (CPU)" Foreground="{DynamicResource TextPrimary}" FontSize="12.5" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtResCpuValue" Text="0.0%" Foreground="{DynamicResource ColorPrimaryBrush}" FontSize="12.5" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Border Height="6" Background="{DynamicResource InputBackground}" CornerRadius="3" Margin="0,0,0,14" ClipToBounds="True">
+                                    <Border x:Name="BarResCpu" HorizontalAlignment="Left" Width="6" Background="#2ECC71" CornerRadius="3"/>
+                                </Border>
+
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock x:Name="LblResRam" Text="Pamięć RAM" Foreground="{DynamicResource TextPrimary}" FontSize="12.5" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtResRamValue" Text="0.0 MB" Foreground="#3498DB" FontSize="12.5" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Border Height="6" Background="{DynamicResource InputBackground}" CornerRadius="3" Margin="0,0,0,14" ClipToBounds="True">
+                                    <Border x:Name="BarResRam" HorizontalAlignment="Left" Width="24" Background="#3498DB" CornerRadius="3"/>
+                                </Border>
+
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock x:Name="LblResNetwork" Text="Ruch sieciowy" Foreground="{DynamicResource TextPrimary}" FontSize="12.5" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtResNetworkValue" Text="0 req • 0 KB" Foreground="#9B59B6" FontSize="12.5" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Border Height="6" Background="{DynamicResource InputBackground}" CornerRadius="3" Margin="0,0,0,14" ClipToBounds="True">
+                                    <Border x:Name="BarResNetwork" HorizontalAlignment="Left" Width="4" Background="#9B59B6" CornerRadius="3"/>
+                                </Border>
+
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock x:Name="LblResCache" Text="Pamięć podręczna i strona" Foreground="{DynamicResource TextPrimary}" FontSize="12.5" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtResCacheValue" Text="0.0 KB" Foreground="#E67E22" FontSize="12.5" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Border Height="6" Background="{DynamicResource InputBackground}" CornerRadius="3" ClipToBounds="True">
+                                    <Border x:Name="BarResCache" HorizontalAlignment="Left" Width="16" Background="#E67E22" CornerRadius="3"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Border Grid.Column="2" Style="{StaticResource ModernCard}" Padding="14">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Margin="2,0,2,10">
+                                <TextBlock x:Name="LblPanelConsole" Text="KONSOLA CZASU RZECZYWISTEGO" Foreground="{DynamicResource TextSecondary}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <Ellipse x:Name="ConsoleStatusDot" Width="8" Height="8" Fill="#8FA89B" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="ConsoleStatusText" Text="STOPPED" Foreground="{DynamicResource TextSecondary}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Border Grid.Row="1" Background="{DynamicResource ConsoleBackground}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1.5" CornerRadius="9" Padding="12">
+                                <TextBox x:Name="ConsoleTextBox"
+                                         IsReadOnly="True"
+                                         Background="Transparent"
+                                         Foreground="{DynamicResource ConsoleForeground}"
+                                         BorderThickness="0"
+                                         FontFamily="Consolas"
+                                         FontSize="12.5"
+                                         TextWrapping="NoWrap"
+                                         VerticalScrollBarVisibility="Auto"
+                                         HorizontalScrollBarVisibility="Auto"
+                                         AcceptsReturn="True"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="SettingsOverlay" Background="{DynamicResource WindowBackground}" Visibility="Collapsed" IsHitTestVisible="False" Panel.ZIndex="5" SnapsToDevicePixels="True">
+                    <Grid Margin="22,16,22,14">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,12">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button x:Name="BackBtn" Style="{StaticResource IconButton}" Click="Settings_Back_Click" Margin="0,0,12,0" ToolTip="Back">
+                                    <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{DynamicResource TextPrimary}"/>
+                                </Button>
+                                <TextBlock x:Name="LblSettingsTitle" Text="Ustawienia" Foreground="{DynamicResource TextPrimary}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <Border HorizontalAlignment="Right" VerticalAlignment="Center" Background="{DynamicResource InputBackground}" BorderBrush="{DynamicResource InputBorderBrush}" BorderThickness="1.5" CornerRadius="8" Padding="3">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="BtnModeSimple" Content="Tryb Prosty" Click="BtnModeSimple_Click" Cursor="Hand" BorderThickness="0" Padding="12,5" FontSize="12" FontWeight="Bold" Background="{DynamicResource ColorPrimaryBrush}" Foreground="White">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Button x:Name="BtnModeAdvanced" Content="Tryb Zaawansowany" Click="BtnModeAdvanced_Click" Cursor="Hand" BorderThickness="0" Padding="12,5" FontSize="12" FontWeight="Bold" Background="Transparent" Foreground="{DynamicResource TextSecondary}">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Border x:Name="WarningBannerBorder" Grid.Row="1" CornerRadius="10" Padding="14,9" Margin="0,0,0,12" BorderThickness="1.5" Background="#24F59E0B" BorderBrush="#F59E0B">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock x:Name="WarningBannerIcon" Text="⚠" FontSize="15" FontWeight="Bold" Foreground="#F59E0B" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="WarningBannerText" Text="Uwaga: Zmiany w ustawieniach nie zostaną zapisane, dopóki nie wyłączysz serwera." Foreground="{DynamicResource TextPrimary}" FontWeight="SemiBold" FontSize="12.5" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <TabControl x:Name="SettingsTabControl" Grid.Row="2" Background="Transparent" BorderThickness="0">
+                            <TabItem x:Name="TabGeneralItem" Header="Główne" Style="{StaticResource TabItemStyle}">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                                    <Border Style="{StaticResource ModernCard}" Margin="2,2,6,8">
+                                        <StackPanel>
+                                            <TextBlock x:Name="LblAppSectionTitle" Text="Ustawienia Aplikacji" Foreground="{DynamicResource TextPrimary}" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                                            <CheckBox x:Name="ChkLaunchStartup" Content="Uruchamiaj przy starcie systemu Windows" Click="SettingControl_Changed"/>
+                                            <CheckBox x:Name="ChkMinimizeTray" Content="Minimalizuj do zasobnika systemowego przy zamknięciu" Click="SettingControl_Changed"/>
+                                            <CheckBox x:Name="ChkCheckUpdates" Content="Sprawdzaj aktualizacje przy starcie" Click="SettingControl_Changed"/>
+                                            <CheckBox x:Name="ChkAutoStartServer" Content="Automatycznie uruchamiaj silnik przy starcie aplikacji" Click="SettingControl_Changed"/>
+
+                                            <Border Height="1" Background="{DynamicResource DividerBrush}" Margin="0,14,0,14"/>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="24"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackPanel Grid.Column="0">
+                                                    <TextBlock x:Name="LblLanguage" Text="Język interfejsu" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <ComboBox x:Name="CmbLanguage" SelectionChanged="CmbLanguage_SelectionChanged">
+                                                        <ComboBoxItem Content="English (en)"/>
+                                                        <ComboBoxItem Content="Polski (pl)"/>
+                                                        <ComboBoxItem Content="Deutsch (de)"/>
+                                                        <ComboBoxItem Content="Français (fr)"/>
+                                                        <ComboBoxItem Content="中文 (zh)"/>
+                                                        <ComboBoxItem Content="日本語 (ja)"/>
+                                                        <ComboBoxItem Content="Norsk Bokmål / Dansk (nb)"/>
+                                                    </ComboBox>
+                                                </StackPanel>
+
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock x:Name="LblTheme" Text="Motyw wyglądu" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <ComboBox x:Name="CmbTheme" SelectionChanged="CmbTheme_SelectionChanged">
+                                                        <ComboBoxItem x:Name="CmbThemeDarkItem" Content="Ciemny (Zielonkawy)"/>
+                                                        <ComboBoxItem x:Name="CmbThemeLightItem" Content="Jasny (Kontrastowy Biały)"/>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+                                </ScrollViewer>
+                            </TabItem>
+
+                            <TabItem x:Name="TabNetworkItem" Header="Sieć" Style="{StaticResource TabItemStyle}">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                                    <Border Style="{StaticResource ModernCard}" Margin="2,2,6,8">
+                                        <StackPanel>
+                                            <Grid Margin="0,0,0,12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="220"/>
+                                                    <ColumnDefinition Width="24"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackPanel Grid.Column="0">
+                                                    <TextBlock x:Name="LblPort" Text="Główny port HTTP" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <TextBox x:Name="TxtPort" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                </StackPanel>
+
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock x:Name="LblBindMode" Text="Tryb rozgłaszania (Host Binding)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <ComboBox x:Name="CmbBindMode" SelectionChanged="SettingCombo_Changed">
+                                                        <ComboBoxItem x:Name="CmbBindBothItem" Content="Localhost oraz 0.0.0.0 (Zalecane)"/>
+                                                        <ComboBoxItem x:Name="CmbBindLocalItem" Content="Tylko Localhost (127.0.0.1)"/>
+                                                        <ComboBoxItem x:Name="CmbBindAllItem" Content="Rozgłaszanie w sieci (0.0.0.0)"/>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </Grid>
+
+                                            <CheckBox x:Name="ChkAutoFallbackPort" Content="Automatycznie wybierz wolny port w razie kolizji" Click="SettingControl_Changed"/>
+                                            <CheckBox x:Name="ChkReqLog" Content="Loguj zapytania HTTP w czasie rzeczywistym w konsoli" Click="SettingControl_Changed"/>
+
+                                            <StackPanel x:Name="AdvNetworkPanel">
+                                                <CheckBox x:Name="ChkCors" Content="Włącz obsługę nagłówków CORS" Click="SettingControl_Changed"/>
+                                                <CheckBox x:Name="ChkWebSockets" Content="Włącz obsługę WebSockets i Live Reload" Click="SettingControl_Changed"/>
+
+                                                <Grid Margin="0,10,0,12">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="24"/>
+                                                        <ColumnDefinition Width="240"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <StackPanel Grid.Column="0">
+                                                        <TextBlock x:Name="LblCorsOrigins" Text="Dozwolone domeny CORS" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <TextBox x:Name="TxtCorsOrigins" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2">
+                                                        <TextBlock x:Name="LblMaxBody" Text="Maks. rozmiar danych (MB)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <TextBox x:Name="TxtMaxBody" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+
+                                            <Button x:Name="BtnScanNetwork" Content="Sprawdź kolizje portów i zaporę Firewall" Style="{StaticResource ColoredActionButton}" Background="#3498DB" HorizontalAlignment="Left" Margin="0,10,0,0" Click="BtnScanNetwork_Click"/>
+                                        </StackPanel>
+                                    </Border>
+                                </ScrollViewer>
+                            </TabItem>
+
+                            <TabItem x:Name="TabDatabaseItem" Header="Baza Danych" Style="{StaticResource TabItemStyle}">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                                    <Border Style="{StaticResource ModernCard}" Margin="2,2,6,8">
+                                        <StackPanel>
+                                            <CheckBox x:Name="ChkEnableDb" Content="Włącz moduł bazy danych (pokaż przycisk bazy)" Click="ChkEnableDb_Click"/>
+
+                                            <StackPanel x:Name="PanelDbConfigAll">
+                                                <Grid Margin="0,10,0,12">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <StackPanel Grid.Column="0">
+                                                        <TextBlock x:Name="LblDbMode" Text="Tryb pracy bazy danych" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <ComboBox x:Name="CmbDbMode" SelectionChanged="CmbDbMode_SelectionChanged">
+                                                            <ComboBoxItem x:Name="CmbDbModeSqliteItem" Content="Wbudowana lokalna baza SQLite"/>
+                                                            <ComboBoxItem x:Name="CmbDbModeMariaItem" Content="Lokalny serwer MariaDB / XAMPP"/>
+                                                            <ComboBoxItem x:Name="CmbDbModeExtItem" Content="Zewnętrzny serwer / Chmura"/>
+                                                        </ComboBox>
+                                                    </StackPanel>
+
+                                                    <StackPanel x:Name="PanelDbProviderCol" Grid.Column="2">
+                                                        <TextBlock x:Name="LblDbProvider" Text="Silnik bazy danych" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <ComboBox x:Name="CmbDbProvider" SelectionChanged="CmbDbProvider_SelectionChanged">
+                                                            <ComboBoxItem Content="SQLite"/>
+                                                            <ComboBoxItem Content="XAMPP (MySQL / MariaDB)"/>
+                                                            <ComboBoxItem Content="MariaDB"/>
+                                                            <ComboBoxItem Content="MySQL"/>
+                                                            <ComboBoxItem Content="Microsoft Azure SQL"/>
+                                                            <ComboBoxItem Content="Microsoft SQL Server"/>
+                                                            <ComboBoxItem Content="PostgreSQL"/>
+                                                            <ComboBoxItem Content="MongoDB"/>
+                                                        </ComboBox>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <StackPanel x:Name="PanelSqliteSettings" Margin="0,0,0,12">
+                                                    <TextBlock x:Name="LblSqlitePath" Text="Ścieżka do pliku bazy SQLite" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="10"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBox x:Name="TxtSqlitePath" Grid.Column="0" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        <Button x:Name="BtnBrowseSqlite" Grid.Column="2" Content="Przeglądaj..." Style="{StaticResource SecondaryBrowseButton}" Click="BtnBrowseSqlite_Click"/>
+                                                    </Grid>
+                                                </StackPanel>
+
+                                                <StackPanel x:Name="PanelMariaDaemonSettings" Margin="0,0,0,12" Visibility="Collapsed">
+                                                    <TextBlock x:Name="LblMariaBinPath" Text="Ścieżka MariaDB / XAMPP (mysqld.exe)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="10"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBox x:Name="TxtMariaBinPath" Grid.Column="0" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        <Button x:Name="BtnBrowseMariaBin" Grid.Column="2" Content="Przeglądaj..." Style="{StaticResource SecondaryBrowseButton}" Click="BtnBrowseMariaBin_Click"/>
+                                                    </Grid>
+                                                </StackPanel>
+
+                                                <StackPanel x:Name="PanelExternalDbServer" Visibility="Collapsed">
+                                                    <Grid Margin="0,0,0,10">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="2*"/>
+                                                            <ColumnDefinition Width="16"/>
+                                                            <ColumnDefinition Width="1*"/>
+                                                            <ColumnDefinition Width="16"/>
+                                                            <ColumnDefinition Width="1.5*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackPanel Grid.Column="0">
+                                                            <TextBlock x:Name="LblDbHost" Text="Adres serwera (Host / IP)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                            <TextBox x:Name="TxtDbHost" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel Grid.Column="2">
+                                                            <TextBlock x:Name="LblDbPort" Text="Port bazy" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                            <TextBox x:Name="TxtDbPort" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel Grid.Column="4">
+                                                            <TextBlock x:Name="LblDbName" Text="Nazwa bazy danych" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                            <TextBox x:Name="TxtDbName" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        </StackPanel>
+                                                    </Grid>
+
+                                                    <Grid Margin="0,0,0,12">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="16"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackPanel Grid.Column="0">
+                                                            <TextBlock x:Name="LblDbUser" Text="Użytkownik" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                            <TextBox x:Name="TxtDbUser" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel Grid.Column="2">
+                                                            <TextBlock x:Name="LblDbPass" Text="Hasło" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                            <TextBox x:Name="TxtDbPass" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </StackPanel>
+
+                                                <StackPanel x:Name="AdvDbPanel">
+                                                    <TextBlock x:Name="LblCustomConn" Text="Własny Connection String (opcjonalnie)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                    <TextBox x:Name="TxtCustomConn" Style="{StaticResource ModernTextBox}" Margin="0,0,0,10" TextChanged="SettingText_Changed"/>
+
+                                                    <CheckBox x:Name="ChkAutoGenConfig" Content="Generuj pliki konfiguracyjne bazy dopasowane do wybranego silnika" Click="SettingControl_Changed"/>
+                                                    <CheckBox x:Name="ChkExposeRestApi" Content="Udostępnij wbudowany punkt REST API (/api/db)" Click="SettingControl_Changed"/>
+                                                </StackPanel>
+
+                                                <WrapPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                                    <Button x:Name="BtnTestDbConn" Content="Testuj połączenie" Style="{StaticResource ColoredActionButton}" Background="#3498DB" Margin="0,0,10,0" Click="BtnTestDbConn_Click"/>
+                                                    <Button x:Name="BtnInitDb" Content="Utwórz / Zainicjuj bazę" Style="{StaticResource ColoredActionButton}" Background="#2ECC71" Margin="0,0,10,0" Click="BtnInitDb_Click"/>
+                                                    <Button x:Name="BtnStartMariaDaemon" Content="Uruchom lokalny proces MariaDB" Style="{StaticResource ColoredActionButton}" Background="#E67E22" Margin="0" Visibility="Collapsed" Click="BtnStartMariaDaemon_Click"/>
+                                                </WrapPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </ScrollViewer>
+                            </TabItem>
+
+                            <TabItem x:Name="TabWebsiteItem" Header="Strona WWW" Style="{StaticResource TabItemStyle}">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                                    <Border Style="{StaticResource ModernCard}" Margin="2,2,6,8">
+                                        <StackPanel>
+                                            <TextBlock x:Name="LblWebsitePath" Text="Katalog główny strony (Web Site)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                            <Grid Margin="0,0,0,12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="10"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox x:Name="TxtWebsitePath" Grid.Column="0" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                <Button x:Name="BtnBrowseWebsite" Grid.Column="2" Content="Przeglądaj..." Style="{StaticResource SecondaryBrowseButton}" Click="BtnBrowseWebsite_Click"/>
+                                            </Grid>
+
+                                            <CheckBox x:Name="ChkEnablePhp" Content="Włącz obsługę skryptów PHP (.php)" Click="SettingControl_Changed"/>
+                                            <CheckBox x:Name="ChkLiveWatch" Content="Monitoruj zmiany plików w katalogu strony na żywo" Click="SettingControl_Changed"/>
+
+                                            <StackPanel x:Name="AdvWebsitePanel" Margin="0,8,0,0">
+                                                <TextBlock x:Name="LblPhpBinPath" Text="Ścieżka interpretera PHP (php-cgi.exe / php.exe - puste = wykryj automatycznie)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                <Grid Margin="0,0,0,12">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox x:Name="TxtPhpBinPath" Grid.Column="0" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    <Button x:Name="BtnBrowsePhpBin" Grid.Column="2" Content="Przeglądaj..." Style="{StaticResource SecondaryBrowseButton}" Click="BtnBrowsePhpBin_Click"/>
+                                                </Grid>
+
+                                                <Grid Margin="0,0,0,10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <StackPanel Grid.Column="0">
+                                                        <TextBlock x:Name="LblDefaultFiles" Text="Domyślne pliki startowe" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <TextBox x:Name="TxtDefaultFiles" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2">
+                                                        <TextBlock x:Name="LblCustom404" Text="Własna strona błędu 404" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <TextBox x:Name="TxtCustom404" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <CheckBox x:Name="ChkDirBrowse" Content="Włącz przeglądanie katalogów (Directory Browsing)" Click="SettingControl_Changed"/>
+                                                <CheckBox x:Name="ChkGzip" Content="Włącz kompresję Gzip / Brotli" Click="SettingControl_Changed"/>
+                                                <CheckBox x:Name="ChkUnknownMime" Content="Serwuj wszystkie nieznane rozszerzenia plików (MIME)" Click="SettingControl_Changed"/>
+                                                <CheckBox x:Name="ChkSpaFallback" Content="Tryb SPA (przekieruj nieznane ścieżki do pliku wejściowego)" Click="SettingControl_Changed"/>
+                                                <CheckBox x:Name="ChkStaticCache" Content="Włącz nagłówki pamięci podręcznej (Cache-Control)" Click="SettingControl_Changed"/>
+
+                                                <Grid Margin="0,10,0,10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <StackPanel Grid.Column="0">
+                                                        <TextBlock x:Name="LblSpaFile" Text="Plik docelowy SPA" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <TextBox x:Name="TxtSpaFile" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2">
+                                                        <TextBlock x:Name="LblCacheAge" Text="Czas życia Cache (sekundy)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                        <TextBox x:Name="TxtCacheAge" Style="{StaticResource ModernTextBox}" TextChanged="SettingText_Changed"/>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <TextBlock x:Name="LblCustomHeaders" Text="Własne nagłówki HTTP (Klucz=Wartość; Klucz2=Wartość2)" Foreground="{DynamicResource TextSecondary}" FontWeight="SemiBold" FontSize="12.5" Margin="0,0,0,6"/>
+                                                <TextBox x:Name="TxtCustomHeaders" Style="{StaticResource ModernTextBox}" Margin="0,0,0,6" TextChanged="SettingText_Changed"/>
+                                            </StackPanel>
+
+                                            <WrapPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                                <Button x:Name="BtnRunWizardInTab" Content="Zbadaj projekt / Utwórz szablon" Style="{StaticResource ColoredActionButton}" Background="#16A085" Margin="0,0,10,0" Click="BtnWizard_Click"/>
+                                                <Button x:Name="BtnRestoreDefaultSite" Content="Przywróć domyślną stronę" Style="{StaticResource ColoredActionButton}" Background="#E67E22" Margin="0,0,10,0" Click="BtnRestoreDefaultSite_Click"/>
+                                                <Button x:Name="BtnOpenWebFolder" Content="Otwórz folder strony" Style="{StaticResource ColoredActionButton}" Background="#3498DB" Margin="0" Click="BtnOpenWebFolder_Click"/>
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </ScrollViewer>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="ModalOverlay" Background="#B8070B09" Visibility="Collapsed" Panel.ZIndex="50" SnapsToDevicePixels="True">
+                    <Border Style="{StaticResource ModernCard}" MaxWidth="540" MinWidth="380" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="22,18">
+                        <StackPanel>
+                            <TextBlock x:Name="ModalTitleText" Text="Informacja" Foreground="{DynamicResource TextPrimary}" FontSize="17" FontWeight="Bold" Margin="0,0,0,12"/>
+                            <Border Background="{DynamicResource ConsoleBackground}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1.5" CornerRadius="8" Padding="12" MaxHeight="300" Margin="0,0,0,16">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <TextBlock x:Name="ModalBodyText" Foreground="{DynamicResource ConsoleForeground}" FontFamily="Consolas" FontSize="12.5" TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="BtnModalYes" Content="Tak" Style="{StaticResource ColoredActionButton}" Background="#2ECC71" Width="100" Margin="0,0,10,0" Visibility="Collapsed" Click="BtnModalYes_Click"/>
+                                <Button x:Name="BtnModalNo" Content="Nie" Style="{StaticResource ColoredActionButton}" Background="#E74C3C" Width="100" Margin="0,0,10,0" Visibility="Collapsed" Click="BtnModalNo_Click"/>
+                                <Button x:Name="BtnModalOk" Content="OK" Style="{StaticResource ColoredActionButton}" Background="#3498DB" Width="110" Margin="0" Click="BtnModalOk_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Border x:Name="BottomBarBorder" Grid.Row="2" Panel.ZIndex="10" Height="38" Background="{DynamicResource HeaderBackground}" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}" CornerRadius="0,0,12,12" ClipToBounds="True">
+                <Grid Margin="20,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Text="© 2026 " Foreground="{DynamicResource TextSecondary}" FontSize="12" VerticalAlignment="Center"/>
+                        <Button x:Name="BtnGithubHnato" Click="BtnGithubHnato_Click" Cursor="Hand" Background="Transparent" BorderThickness="0" Padding="2,0" VerticalAlignment="Center" ToolTip="https://github.com/Hnato">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <TextBlock x:Name="LinkText" Text="Hnato" Foreground="{DynamicResource ColorPrimaryBrush}" FontWeight="Bold" FontSize="12" TextDecorations="Underline"/>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="LinkText" Property="Opacity" Value="0.8"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Image Source="pack://application:,,,/Parrotcore.png" Width="16" Height="16" Margin="0,0,7,0" RenderOptions.BitmapScalingMode="Fant"/>
+                        <TextBlock x:Name="LblFooterVersion" Text="ParrotCore 2.3 Hyacinth" Foreground="{DynamicResource TextSecondary}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

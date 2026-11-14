@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Your Website</title>
+    <link rel="icon" type="image/x-icon" href="Parrotcore.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="Parrotcore.ico">
+    <link rel="stylesheet" href="css/style.css?v=2.4">
+    <style>
+        a:link { color: #ffffff; text-decoration: underline; text-decoration-color: #2ecc71; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+        a:visited { color: #2ecc71; text-decoration: underline; text-decoration-color: #2ecc71; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+        a:hover { color: #2ecc71; opacity: 0.9; }
+        .topnav { display: flex; align-items: center; justify-content: space-between; background: #18221d; border: 1px solid #263830; border-radius: 14px; padding: 14px 24px; margin-bottom: 24px; }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 17px; text-decoration: none !important; color: #ffffff !important; }
+        .brand img { width: 30px; height: 30px; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; gap: 16px; }
+        .mac-window { background: #090d0b; border: 1px solid #263830; border-radius: 12px; overflow: hidden; margin-top: 20px; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45); }
+        .mac-header { background: #131b17; border-bottom: 1px solid #22332b; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+        .mac-dots { display: flex; gap: 8px; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { color: #8fa89b; font-family: 'Consolas', monospace; font-size: 12px; font-weight: 600; }
+        .mac-body { padding: 18px 20px; font-family: 'Consolas', monospace; font-size: 13.5px; line-height: 1.6; color: #e2f1e8; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <nav class="topnav">
+            <a href="index.html" class="brand">
+                <img src="Parrotcore.ico" width="30" height="30" alt="Logo">
+                <span>Web Server Workspace</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="guide.html" class="nav-link">Full Guide &amp; Documentation</a>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <span class="status-pill" id="livePill">● Server is online and ready</span>
+            <h1>Your website is live!</h1>
+            <p class="subtitle">Place your HTML, CSS, JavaScript, or PHP files directly into the <code>Web Site</code> folder (or choose any folder on your computer in Settings) to publish them immediately on <code>localhost</code> and your local network.</p>
+            <div class="feature-pills">
+                <span class="feature-pill">⚡ Static &amp; SPA Hosting</span>
+                <span class="feature-pill">🐘 Native PHP (.php) Interpreter</span>
+                <span class="feature-pill">🗄️ SQLite, MariaDB/XAMPP &amp; Cloud DBs</span>
+                <span class="feature-pill">🌐 Localhost &amp; 0.0.0.0 Broadcast</span>
+            </div>
+        </header>
+
+        <section class="grid">
+            <div class="card">
+                <h3>Quick Start &amp; Full Manual</h3>
+                <p>Explore the complete interactive manual covering custom folders, PHP scripts, SQLite/MariaDB/Cloud databases, and network broadcasting.</p>
+                <a href="guide.html" class="btn">Open Complete User Guide &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>Database &amp; Live Status</h3>
+                <p id="dbInfoText">Checking server and database status...</p>
+                <button onclick="checkServerStatus()">Refresh Connection Status</button>
+            </div>
+        </section>
+
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dots">
+                    <span class="mac-dot red"></span>
+                    <span class="mac-dot yellow"></span>
+                    <span class="mac-dot green"></span>
+                </div>
+                <span class="mac-title">server-status.json — live output</span>
+            </div>
+            <div class="mac-body" id="outputPanel">Ready. Click "Refresh Connection Status" above to inspect live server status.</div>
+        </div>
+    </main>
+    <script src="js/app.js?v=2.4"></script>
+</body>
+</html>
